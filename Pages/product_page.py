@@ -1,6 +1,6 @@
 from .base_page import BasePage
 from .locators import ProductPageLocators
-
+link = "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/"
 
 class ProductPage(BasePage):
 
@@ -34,4 +34,15 @@ class ProductPage(BasePage):
         product_price = self.browser.find_element(*ProductPageLocators.PRODUCT_PRICE).text
         # Проверяем, что цена товара присутствует в сообщении со стоимостью корзины
         assert product_price in message_basket_total, "No product price in the message"
+
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_disappeared(self):
+        assert self.is_disappeared(*ProductPageLocators.SUCCESS_MESSAGE), \
+            "Success message is not disappeared"
+
+
+
 
